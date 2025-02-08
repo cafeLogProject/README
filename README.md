@@ -79,8 +79,8 @@
     <td align="center"><strong>회원가입, 로그인</strong><br><img src="https://raw.githubusercontent.com/cafeLogProject/README/main/image/video/login.gif" width="40%"></td>
   </tr>
   <tr>
-    <td align="center"><strong>카페 스크랩</strong><br><img src="https://raw.githubusercontent.com/cafeLogProject/README/main/image/video/mypage.gif" width="40%"></td>
-    <td align="center" colspan="2"><strong>마이페이지</strong><br><img src="https://raw.githubusercontent.com/cafeLogProject/README/main/image/video/cafe_scrap.gif" width="40%"></td>
+    <td align="center"><strong>카페 스크랩</strong><br><img src="https://raw.githubusercontent.com/cafeLogProject/README/main/image/video/cafe_scrap.gif" width="40%"></td>
+    <td align="center" colspan="2"><strong>마이페이지</strong><br><img src="https://raw.githubusercontent.com/cafeLogProject/README/main/image/video/mypage_review_scroll.gif" width="40%"></td>
   </tr>
   <tr>
     <td align="center"><strong>프로필 수정</strong><br><img src="https://raw.githubusercontent.com/cafeLogProject/README/main/image/video/profile_edit.gif" width="40%"></td>
