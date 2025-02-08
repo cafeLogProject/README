@@ -61,20 +61,27 @@
 
 
 
-
 <br>
 
 ## 🔍 주요 기능
 
-| **카페 검색** | **카페 상세페이지** |
-|:---:|:---:|
-| - | - | 
-| **리뷰 필터링 조회** | **리뷰 작성, 임시저장** |
-| - | - | 
-| **회원가입, 로그인** | **마이페이지** |
-| - | - | 
-| **카페 스크랩** |
-| - |
+<table>
+  <tr>
+    <td align="center"><strong>카페 검색</strong><br><img src="https://raw.githubusercontent.com/cafeLogProject/README/main/image/video/cafe_search.gif" alt="카페 검색" width="30%"></td>
+    <td align="center"><strong>카페 상세페이지</strong></td>
+  </tr>
+  <tr>
+    <td align="center"><strong>리뷰 필터링 조회</strong></td>
+    <td align="center"><strong>리뷰 작성, 임시저장</strong></td>
+  </tr>
+  <tr>
+    <td align="center"><strong>회원가입, 로그인</strong></td>
+    <td align="center"><strong>마이페이지</strong></td>
+  </tr>
+  <tr>
+    <td align="center" colspan="2"><strong>카페 스크랩</strong></td>
+  </tr>
+</table>
 <br>
 
 <br>
