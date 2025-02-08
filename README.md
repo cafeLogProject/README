@@ -67,15 +67,15 @@
 
 <table>
   <tr>
-    <td align="center"><strong>카페 검색</strong><br><img src="https://raw.githubusercontent.com/cafeLogProject/README/main/image/video/cafe_search.gif" width="30%"></td>
+    <td align="center"><strong>카페 검색</strong><br><img src="https://raw.githubusercontent.com/cafeLogProject/README/main/image/video/cafe_search.gif" width="40%"></td>
     <td align="center"><strong>카페 상세페이지</strong></td>
   </tr>
   <tr>
-    <td align="center"><strong>리뷰 필터링 조회</strong><br><img src="https://raw.githubusercontent.com/cafeLogProject/README/main/image/video/review_filter.gif" width="30%"></td>
-    <td align="center"><strong>리뷰 작성</strong><br><img src="https://raw.githubusercontent.com/cafeLogProject/README/main/image/video/review_write.gif" width="30%"></td>
+    <td align="center"><strong>리뷰 필터링 조회</strong><br><img src="https://raw.githubusercontent.com/cafeLogProject/README/main/image/video/review_filter.gif" width="40%"></td>
+    <td align="center"><strong>리뷰 작성</strong><br><img src="https://raw.githubusercontent.com/cafeLogProject/README/main/image/video/review_write.gif" width="40%"></td>
   </tr>
   <tr>
-    <td align="center"><strong>임시저장</strong><br><img src="https://raw.githubusercontent.com/cafeLogProject/README/main/image/video/review_draft.gif" width="30%"></td>
+    <td align="center"><strong>임시저장</strong><br><img src="https://raw.githubusercontent.com/cafeLogProject/README/main/image/video/review_draft.gif" width="40%"></td>
     <td align="center"><strong>회원가입, 로그인</strong></td>
   </tr>
   <tr>
