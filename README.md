@@ -33,10 +33,32 @@
 <br>
 
 ## 🏃 팀원 소개
-|[김병찬](https://github.com/팀원1아이디)|[문남경](https://github.com/팀원2아이디)| [이승헌](https://github.com/팀원3아이디) |[임용태](https://github.com/팀원4아이디)| [이주연](https://github.com/leejuyeon-star)|
-| :-------------------------: | :-------------------------: | :----------------------: | :-----------------------: | :-----------------------: |
-| Backend | UI/UX Design | Frontend | Frontend | Backend |
-| - | - | - | - | - |
+<table>
+  <tr>
+    <td align="center"><a href="https://github.com/팀원1아이디">김병찬</a></td>
+    <td align="center"><a href="https://github.com/팀원2아이디">문남경</a></td>
+    <td align="center"><a href="https://github.com/팀원3아이디">이승헌</a></td>
+    <td align="center"><a href="https://github.com/팀원4아이디">임용태</a></td>
+    <td align="center"><a href="https://github.com/leejuyeon-star">이주연</a></td>
+  </tr>
+  <tr>
+    <td align="center">Backend</td>
+    <td align="center">UI/UX Design</td>
+    <td align="center">Frontend</td>
+    <td align="center">Frontend</td>
+    <td align="center">Backend</td>
+  </tr>
+  <tr>
+    <td align="center">-</td>
+    <td align="center">-</td>
+    <td align="center">-</td>
+    <td align="center">-</td>
+    <td align="center">
+      <img src="https://raw.githubusercontent.com/cafeLogProject/README/main/image/profile/leejuyeon.jpg" alt="juyeon" width="100">
+    </td>
+  </tr>
+</table>
+
 
 
 
