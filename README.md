@@ -80,7 +80,7 @@
   </tr>
   <tr>
     <td align="center"><strong>마이페이지</strong></td>
-    <td align="center" colspan="2"><strong>카페 스크랩</strong></td>
+    <td align="center" colspan="2"><strong>카페 스크랩</strong><img src="https://raw.githubusercontent.com/cafeLogProject/README/main/image/video/cafe_scrap.gif" width="40%"></td>
   </tr>
 </table>
 <br>
