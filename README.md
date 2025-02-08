@@ -8,8 +8,6 @@
 
 </div>
 
-https://github.com/user-attachments/assets/feba35c7-1108-404d-b35f-0f144d971295
-
 # ☕ Brewscape - 카페로그
 ### "공부하기 좋은 카페 없나? 커피가 맛있는 카페 없나?"
 
