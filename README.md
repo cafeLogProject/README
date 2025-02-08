@@ -39,9 +39,6 @@
 | <img src ="https://github.com/chujaeyeong/MAT_ZIP_readme_chujy/assets/123634960/23a1ad5b-0408-42e4-918a-c7c7fb7b0934" width="440" height="260" /> |
 <br>
 
-## 🧩 어플리케이션 흐름
-![](./image/flow.png)
-
 <br>
 
 ## 📚 기술 스택
@@ -81,28 +78,31 @@
 
 ## 🌟 주요 기능 구현
 - [김병찬]
-  - 로그인/회원가입
-    - oauth2를 이용
+	- 로그인/회원가입
+    		- oauth2를 이용
     - access, refresh 토큰을 이용하여
   - 카페 조회
     - 네이버 API를 이용한 카페 정보 최신화
+- [문남경]
+- [이승헌]
+- [임용태]
 - [이주연]
-    - 이미지 관련 기능
-      - 이미지 저장시 서버 내부에 저장
-    - 리뷰 임시저장 기능
-        - 임시저장 개별 테이블 생성하여 관리
-    - 리뷰 필터링 조회
-      - SQL 쿼리를 사용한 필터링
-      
-    - 
-    - 기능 테스트
-      - 통합 테스트 코드 작성
+  	- 리뷰 관련 기능
+  	   	- 리뷰 최신순/별점순 조회
+		- 리뷰 태그 필터링 조회
+  	   	- 카페의 모든 리뷰 조회
+		- 리뷰 CRUD
+  	- 리뷰 임시저장 관련 기능
+  	  	- 내 임시저장 조회
+ 		- 임시저장 CRUD
+	- 이미지 관련 기능
+ 		- 리뷰 이미지 CRUD
+		- 임시저장 리뷰 이미지 CRUD
+		- 프로필 이미지 CRUD
+  	- 닉네임 랜덤 생성 기능
+
 
 <br>
-
-## 📊 ERD 설계
-
-## 🗺️ 시스템 아키텍쳐 구성도
 
 ## ⚽ 트러블 슈팅
 <details>
@@ -154,6 +154,148 @@
 </details>
 <details>
 <summary> 이주연 </summary>
+<details>
+<summary>DTO 형변환시의 코드 가독성 문제 해결</summary>
+<br>
+    
+<!-- - **DTO 형변환시의 코드 가독성 문제 해결 **** -->
+### 🤔문제 발생
+
+- Tuple을 사용하여 DTO를 변환하는 과정에서 코드가 복잡해지고, 가독성이 떨어지며 유지보수에 어려움이 발생했다.
+
+- **문제의 코드**
+    - 수동으로 DTO에 매핑하는 구조 → **코드 복잡, 가독성 저하**
+
+    ```jsx
+    public ShowReviewResponse findShowReviewResponseById(Long reviewId) {
+        List<Tuple> results = queryFactory
+                 .from(review)
+                .select(review, tag.tagId, reviewImage.id, user)
+                .leftJoin(reviewImage).on(review.id.eq(reviewImage.review.id))
+                .leftJoin(review.user).fetchJoin()
+                .leftJoin(tag).on(review.id.eq(tag.review.id))
+                .where(review.id.eq(reviewId))
+                .fetch();
+
+        Map<Long, ShowReviewResponse> reviewMap = new HashMap<>();
+        Long reviewId = null;
+        for (Tuple tuple : results) {
+            Review reviewEntity = tuple.get(review);
+            Integer tagId = tuple.get(tag.tagId);
+            UUID reviewImageId = tuple.get(reviewImage.id);
+            User userEntity = tuple.get(user);
+            reviewId = reviewEntity.getId();
+
+            ShowReviewResponse res = reviewMap.computeIfAbsent(reviewEntity.getId(), key 
+                    -> new ShowReviewResponse(reviewEntity, userEntity));
+            if (tagId != null) {
+                res.addTagId(tagId);
+            }
+            if (reviewImageId != null) {
+                res.addImageId(reviewImageId);
+            }
+        }
+        return reviewMap.get(reviewId);
+
+    }
+    ```
+
+
+### ⛏해결 과정
+
+## **✅** 시도 1 : @QueryProjection 사용하기
+
+- @QueryProjection을 활용하여 Q타입 DTO 객체를 자동으로 생성하고, 이를 **select()**에서 바로 사용
+- **🛠 리팩토링 결과**
+
+    ```java
+    public ShowReviewResponse findShowReviewResponseById(Long reviewId) {
+        return queryFactory
+                .select(new QShowReviewResponse(
+                        review,
+                        set(reviewImage.id),    
+                        set(tag.tagId)
+                ))
+                .from(review)
+                .leftJoin(reviewImage).on(review.id.eq(reviewImage.review.id))
+                .leftJoin(review.user).fetchJoin()
+                .leftJoin(tag).on(review.id.eq(tag.review.id))
+                .where(review.id.eq(reviewId))
+                .groupBy(review.id, reviewImage.id, tag.tagId)
+                .fetchOne();
+    }
+    ```
+
+
+- **문제 발생** : **카테시안 곱 문제가 발생**
+    - DISTINCT로는 해결할 수 없음
+        - 카테시안 곱에서 발생한 중복 데이터는 해결하지 못한다!
+        - left join에 의해 여러 reviewImage와 여러 tag가 하나의 review에 대해 각각 다른 행으로 생성
+
+            → reviewImage.id와 tag.tagId는 개별적으로 그룹화되어 중복된 데이터 생성됨
+
+
+---
+
+## **✅** 시도 2 : QueryDSL의 groupBy().transform() 사용하기
+
+### ❓일반적인 groupBy와 무엇이 다른가?
+
+- **그룹화 시점이 다르다!**
+    - 일반적인 groupBy는 그룹화 로직을 **DB에서 수행**
+    - groupBy().transform()은 그룹화 로직을 **메모리에서 수행**
+
+        → **카테시안 곱 문제를** 간단하게 해결할 수 있음
+
+
+### ❓카테시안 곱 문제를 어떻게 해결할까?
+
+- 메모리에서 그룹화를 수행하기 때문에 복잡한 DB 쿼리 대신 java 라이브러리를 이용할 수 있음
+
+    → java의 set() 함수 이용하여 중복 제거 후 DTO로 변환 가능
+
+
+### ❓사용시 성능 저하 문제는 없을까?
+
+- **그룹화할 데이터의 양이 적은 경우에만 사용해야 한다!**
+    - 그룹화 로직이 메모리에서 처리되므로 데이터를 한 번에 메모리에 로드해야 함
+
+        → 데이터 양이 많으면 CPU와 메모리에 부담을 줄 수 있음
+
+    - **이번 문제의 경우..**
+        - 함수 호출시 메모리에 로드되는 최대 행 개수가 25개(카테시안 곱으로 인한 중복 데이터 포함)로, 데이터 양이 적어 성능에 큰 영향 없음
+
+
+---
+
+## **🛠** 최종 리팩토링 결과
+
+```jsx
+public ShowReviewResponse findShowReviewResponseById(Long reviewId) {
+    return queryFactory
+            .from(review)
+            .leftJoin(reviewImage).on(review.id.eq(reviewImage.review.id))
+            .leftJoin(review.user).fetchJoin()
+            .leftJoin(tag).on(review.id.eq(tag.review.id))
+            .where(review.id.eq(reviewId))
+            .transform(
+                    groupBy(review.id).as(
+                            new QShowReviewResponse(
+                                    review,
+                                    set(reviewImage.id),    // 카테시안 곱 문제 방지를 위해 set 사용
+                                    set(tag.tagId)          // 카테시안 곱 문제 방지를 위해 set 사용
+                            )
+                    )
+            )
+            .get(reviewId);
+}
+```
+
+### 💎결론
+
+- **QueryDSL의 groupBy().transform()**을 사용하여 DTO로 변환함으로써 가독성을 높이고, 카테시안 곱 문제도 해결할 수 있었다.
+</details>
+</details>
 </details>
 
 
@@ -161,4 +303,6 @@
 * [노션](https://www.notion.so/18fc5e41552d81bfa985c870e5c2fed4)
 * [포스트맨](https://www.postman.com/cafelog/cafelog-team/overview)
 * [피그마](https://www.figma.com/design/UPFpjUYoJa0nx1GiQNktp0/%5B2025-%ED%8C%80-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%5D-%EC%BB%A4%ED%94%BC-%EA%B8%B0%EB%A1%9D?node-id=0-1&t=0iUqRTZvxP7KlhpO-1)
+
+
 
