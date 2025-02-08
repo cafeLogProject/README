@@ -71,14 +71,15 @@
     <td align="center"><strong>카페 상세페이지</strong></td>
   </tr>
   <tr>
-    <td align="center"><strong>리뷰 필터링 조회</strong></td>
-    <td align="center"><strong>리뷰 작성, 임시저장</strong></td>
+    <td align="center"><strong>리뷰 필터링 조회</strong><br><img src="https://raw.githubusercontent.com/cafeLogProject/README/main/image/video/review_filter.gif" alt="카페 필터링" width="30%"></td>
+    <td align="center"><strong>리뷰 작성</strong></td>
   </tr>
   <tr>
+    <td align="center"><strong>임시저장</strong></td>
     <td align="center"><strong>회원가입, 로그인</strong></td>
-    <td align="center"><strong>마이페이지</strong></td>
   </tr>
   <tr>
+    <td align="center"><strong>마이페이지</strong></td>
     <td align="center" colspan="2"><strong>카페 스크랩</strong></td>
   </tr>
 </table>
