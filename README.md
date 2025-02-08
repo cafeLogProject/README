@@ -1,7 +1,5 @@
-<div align="center">
-	
-![](./image/brewscape.png)
-
+<div style="display: flex; justify-content: center;">
+  <img src="https://raw.githubusercontent.com/cafeLogProject/README/main/image/brewscape.png" alt="Brewscape Logo">
 </div>
 
 # ☕ Brewscape - 카페로그
