@@ -257,6 +257,36 @@
 </details>
 <details>
 <summary> 임용태 </summary>
+<details>
+<summary>리뷰 임시저장 기능에서의 API 무한 호출 문제</summary>
+<br>
+    
+# 🤔문제 발생
+
+- 리뷰 임시저장 기능 구현 중 API가 무한히 호출되는 현상이 발생
+        
+- 상태 업데이트와 API 호출이 서로를 트리거하는 순환 의존성 문제 발생
+    
+# 🔍원인 분석
+    
+- useEffect 내에서의 함수 재생성 문제
+
+- API 호출 함수가 상태 업데이트를 트리거하고, 상태 업데이트가 다시 API 호출을 트리거하는 순환 구조 형성
+
+# ⛏해결 과정
+    
+- useCallback을 사용하여 API 호출 함수 메모이제이션
+
+- 불필요한 의존성 제거 및 의존성 배열 최적화
+    
+- API 관련 로직을 custom hook으로 분리하여 재사용성 향상
+    
+# 💎결론
+    
+- useCallback과 의존성 배열 최적화를 통해 무한 호출 문제 해결
+
+- 커스텀 훅을 사용하여 코드 재사용성과 유지보수성 향상
+</details>
 </details>
 <details>
 <summary> 이주연 </summary>
@@ -340,10 +370,10 @@
 
 ## 💡 **@ElementCollection 필드 저장시 쿼리 과다 문제 해결과정**
 
-### ✅ 시도 : **betch insert 사용하기 → 실패**
+### ✅ 시도 : **batch insert 사용하기 → 실패**
 
 - 적용해보았지만 작동하지 않음
-    - 쿼리 로그를 통해 betch insert가 작동하지 않음을 확인
+    - 쿼리 로그를 통해 batch insert가 작동하지 않음을 확인
         
         ![image.png](%E1%84%8C%E1%85%A6%E1%84%86%E1%85%A9%E1%86%A8%20%E1%84%8B%E1%85%A5%E1%86%B9%E1%84%8B%E1%85%B3%E1%86%B7%20194a464e93ea802cb903ff2d951b7586/image%205.png)
         
