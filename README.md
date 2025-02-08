@@ -72,7 +72,7 @@
   </tr>
   <tr>
     <td align="center"><strong>리뷰 필터링 조회</strong><br><img src="https://raw.githubusercontent.com/cafeLogProject/README/main/image/video/review_filter.gif" width="30%"></td>
-    <td align="center"><strong>리뷰 작성</strong></td>
+    <td align="center"><strong>리뷰 작성</strong><br><img src="https://raw.githubusercontent.com/cafeLogProject/README/main/image/video/review_write.gif" width="30%"></td>
   </tr>
   <tr>
     <td align="center"><strong>임시저장</strong><br><img src="https://raw.githubusercontent.com/cafeLogProject/README/main/image/video/review_draft.gif" width="30%"></td>
