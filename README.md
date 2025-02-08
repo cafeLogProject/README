@@ -9,6 +9,10 @@
 </div>
 
 ![ㅇ](./image/video/cafe_search.mp4)
+<video width="600" controls>
+  <source src="https://raw.githubusercontent.com/cafeLogProject/README/main/image/video/cafe_search.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
 
 # ☕ Brewscape - 카페로그
 ### "공부하기 좋은 카페 없나? 커피가 맛있는 카페 없나?"
