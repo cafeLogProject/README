@@ -35,7 +35,7 @@
 ## 🏃 팀원 소개
 <table>
   <tr>
-    <td align="center"><a href="https://github.com/팀원1아이디">김병찬</a></td>
+    <td align="center"><a href="https://github.com/acoldbottle">김병찬</a></td>
     <td align="center"><a href="https://github.com/팀원2아이디">문남경</a></td>
     <td align="center"><a href="https://github.com/florence1920">이승헌</a></td>
     <td align="center"><a href="https://github.com/rough78">임용태</a></td>
@@ -50,6 +50,7 @@
   </tr>
   <tr>
     <td align="center">-</td>
+	  <img src="https://raw.githubusercontent.com/cafeLogProject/README/main/image/profile/byoungchan.png" alt="chan"/>
     <td align="center">-</td>
     <td align="center">
         <img src="https://raw.githubusercontent.com/cafeLogProject/README/main/image/profile/leeseungheon.jpg" width="100" alt="lsh"/>  
