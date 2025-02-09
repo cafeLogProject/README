@@ -36,7 +36,7 @@
 <table>
   <tr>
     <td align="center"><a href="https://github.com/acoldbottle">김병찬</a></td>
-    <td align="center"><a href="https://github.com/팀원2아이디">문남경</a></td>
+    <td align="center">문남경</td>
     <td align="center"><a href="https://github.com/florence1920">이승헌</a></td>
     <td align="center"><a href="https://github.com/rough78">임용태</a></td>
     <td align="center"><a href="https://github.com/leejuyeon-star">이주연</a></td>
@@ -47,6 +47,13 @@
     <td align="center">Frontend</td>
     <td align="center">Frontend</td>
     <td align="center">Backend</td>
+  </tr>
+  <tr>
+    <td align="center"></td>
+    <td align="center"></td>
+    <td align="center"></td>
+    <td align="center"></td>
+    <td align="center">kkobucks@naver.com</td>
   </tr>
   <tr>
     <td align="center">
