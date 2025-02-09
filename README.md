@@ -49,10 +49,10 @@
     <td align="center">Backend</td>
   </tr>
   <tr>
-    <td align="center"></td>
-    <td align="center"></td>
-    <td align="center"></td>
-    <td align="center"></td>
+    <td align="center">kimbc715@gmail.com</td>
+    <td align="center">luna7252@naver.com</td>
+    <td align="center">jetaime21212@gmail.com</td>
+    <td align="center">lim7897@gmail.com</td>
     <td align="center">kkobucks@naver.com</td>
   </tr>
   <tr>
