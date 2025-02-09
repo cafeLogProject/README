@@ -38,7 +38,7 @@
     <td align="center"><a href="https://github.com/팀원1아이디">김병찬</a></td>
     <td align="center"><a href="https://github.com/팀원2아이디">문남경</a></td>
     <td align="center"><a href="https://github.com/florence1920">이승헌</a></td>
-    <td align="center"><a href="https://github.com/팀원4아이디">임용태</a></td>
+    <td align="center"><a href="https://github.com/rough78">임용태</a></td>
     <td align="center"><a href="https://github.com/leejuyeon-star">이주연</a></td>
   </tr>
   <tr>
