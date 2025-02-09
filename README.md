@@ -54,7 +54,9 @@
     <td align="center">
         <img src="https://raw.githubusercontent.com/cafeLogProject/README/main/image/profile/leeseungheon.jpg" width="100" alt="lsh"/>  
     </td>
-    <td align="center">-</td>
+    <td align="center">
+        <img src="https://raw.githubusercontent.com/cafeLogProject/README/refs/heads/main/image/profile/limyongtae.jpg" width="100" alt="yongtae"/>  
+    </td>
     <td align="center">
       <img src="https://raw.githubusercontent.com/cafeLogProject/README/main/image/profile/leejuyeon.jpg" alt="juyeon" width="100">
     </td>
@@ -333,6 +335,58 @@ SCSS Modules의 장점을 유지하면서도 전역 스타일을 효과적으로
 - useCallback과 의존성 배열 최적화를 통해 무한 호출 문제 해결
 
 - 커스텀 훅을 사용하여 코드 재사용성과 유지보수성 향상
+</details>
+<details>
+<summary>이미지 업로드 상태 관리 문제</summary>
+<br>
+
+# 🤔문제 발생
+
+- 사진 업로드 기능 구현 시 API 호출과 상태 관리의 강한 결합으로 인한 문제 발생
+Store 내부에서 직접 API 훅을 사용하려 할 때 훅 규칙 위반 문제 발생
+업로드 진행 상태와 실패 처리의 복잡성 증가
+
+# 🔍원인 분석
+
+- 즉각적인 상태 반영 필요성:
+
+  - 파일 선택 즉시 미리보기 생성 필요
+  - 업로드 시작과 동시에 진행 상태 표시 필요
+  - API 응답 즉시 성공/실패 상태 반영 필요
+
+- 복잡한 상태 변화 시나리오:
+  - 선택된 파일 → 임시 상태(미리보기) → 업로드 중 → 성공/실패
+
+- 실패 처리의 복잡성:
+  - 업로드 실패 시 이전 상태로 정확한 복구 필요
+  - 여러 파일 동시 업로드 시 부분 실패 처리 필요
+
+# ⛏해결 과정
+
+- API 주입 패턴 도입:
+
+  - Store 생성 함수에 API 메서드 주입
+  - API 호출과 상태 관리 로직 분리
+
+- 상태 관리 신뢰성 확보:
+
+  - API 호출과 상태 업데이트 동기화
+  - 업로드 실패 시 안전한 상태 복구
+  - 동시 업로드 시 각 파일의 상태 추적
+
+- 사용자 경험 개선:
+  - 즉각적인 피드백 제공
+  - 업로드 진행 상태의 실시간 반영
+  - 오류 상황에서도 안정적인 동작
+
+
+
+# 💎결론
+
+API 호출과 상태 관리 로직을 분리하여 유지보수성 향상
+상태 관리의 신뢰성을 확보하고 안정적인 파일 업로드 처리 구현
+API와 상태 관리의 분리로 재사용 가능한 구조 확립
+
 </details>
 </details>
 <details>
