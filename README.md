@@ -37,7 +37,7 @@
   <tr>
     <td align="center"><a href="https://github.com/팀원1아이디">김병찬</a></td>
     <td align="center"><a href="https://github.com/팀원2아이디">문남경</a></td>
-    <td align="center"><a href="https://github.com/팀원3아이디">이승헌</a></td>
+    <td align="center"><a href="https://github.com/florence1920">이승헌</a></td>
     <td align="center"><a href="https://github.com/팀원4아이디">임용태</a></td>
     <td align="center"><a href="https://github.com/leejuyeon-star">이주연</a></td>
   </tr>
@@ -51,7 +51,9 @@
   <tr>
     <td align="center">-</td>
     <td align="center">-</td>
-    <td align="center">-</td>
+    <td align="center">
+        <img src="https://raw.githubusercontent.com/cafeLogProject/README/main/image/profile/leeseungheon.jpg" width="100" alt="lsh"/>  
+    </td>
     <td align="center">-</td>
     <td align="center">
       <img src="https://raw.githubusercontent.com/cafeLogProject/README/main/image/profile/leejuyeon.jpg" alt="juyeon" width="100">
@@ -205,6 +207,11 @@
 - [김병찬]
 - [문남경]
 - [이승헌]
+    - 마이페이지 관련 기능
+        - 내 정보 조회, 수정
+        - 프로필 이미지 조회, 수정
+    - UI 컴포넌트 관련 기능
+        - react-modal, react-toastify 사용
 - [임용태]
     - 리뷰 임시저장 관련 기능
   	    - 임시저장 백엔드와 준실시간 연동
@@ -254,6 +261,46 @@
 </details>
 <details>
 <summary> 이승헌 </summary>
+<details>
+<summary>SCSS Module을 전역적으로 사용하는 방법</summary>
+<br/>
+
+# 🤔 문제 발생
+    
+React에서 SCSS Modules를 사용하면 클래스가 로컬 스코프화되어 컴포넌트 간 스타일 충돌을 방지하는 장점이 있다. 하지만 특정 스타일을 전역적으로 적용해야 할 경우, 어떻게 관리하는 것이 가장 효과적일까?
+    
+# 🔍 원인 분석
+    
+- SCSS Modules를 사용하면 기본적으로 클래스명이 로컬화되어, 다른 컴포넌트에서 동일한 클래스를 재사용하기 어렵다.
+- 특정 클래스를 전역적으로 사용하려면 `:global`을 활용할 수 있지만, 이를 여러 파일에서 남용하면 어떤 클래스가 전역적으로 적용되는지 한눈에 파악하기 어려워진다.
+- 프로젝트가 커질수록 스타일 관리가 어려워지고, 유지보수성이 떨어질 가능성이 있다.
+    
+# ⛏ 해결 과정
+    
+이 문제를 해결하기 위해 **SCSS 7-1 패턴**을 도입하여 스타일을 체계적으로 관리했다.
+    
+1. **전역 스타일과 컴포넌트 스타일을 분리**
+    - 전체 프로젝트에서 공통적으로 적용되는 스타일(글꼴, 색상, 레이아웃 등)은 `styles` 디렉터리에 모아 관리했다.
+    - 개별 컴포넌트의 스타일은 SCSS Modules를 활용하여 유지보수성을 높였다.
+2. **버튼 및 공통 컴포넌트 스타일 통합**
+    - 버튼, 입력 필드 등 공통 컴포넌트에서 사용되는 파일을 분리했다.
+    - 이를 필요할 때만 가져와 사용할 수 있도록 `@import`를 활용했다.
+3. **SCSS 변수를 활용한 일관된 디자인 시스템 구축**
+    - 색상, 폰트 크기, 여백 등의 값을 `_variables.scss`에 정의하여 일관된 스타일을 유지했다.
+    - 예를 들어, `primaryColor`를 변경하면 전체 버튼 색상이 한 번에 적용되도록 설정했다.
+        
+    
+# 💎 결론
+    
+SCSS Modules의 장점을 유지하면서도 전역 스타일을 효과적으로 관리하려면 **전역 스타일과 로컬 스타일을 분리하는 전략이 필수적**이다.
+
+- SCSS 7-1 패턴을 적용하여 전역 스타일을 별도로 관리하면 유지보수가 쉬워진다.
+- 버튼, 폰트, 색상 등의 공통 스타일은 별도의 SCSS 파일로 분리하여 중복을 최소화한다.
+- SCSS 변수를 적극 활용하여 일관된 스타일 시스템을 유지하면 확장성과 유지보수성이 향상된다.
+
+이러한 방식을 적용하면 SCSS Modules의 로컬 스코프화 장점을 살리면서도, 전역적인 스타일을 효율적으로 관리할 수 있다.
+    
+</details>
 </details>
 <details>
 <summary> 임용태 </summary>
