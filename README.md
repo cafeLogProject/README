@@ -209,6 +209,19 @@
 
 ## 🌟 주요 기능 구현
 - [김병찬]
+    - 로그인 관련 기능
+        - OAuth2를 활용한 소셜로그인(구글, 페이스북, 네이버)
+    - 프로필 관련 기능
+     	- 내 정보 수정, 조회
+    	- 닉네임 중복 체크
+    - 카페 관련 기능
+ 	- 네이버 검색 API를 활용한 전국에 있는 카페 검색
+	- 카페 저장, 조회
+    - 카페 스크랩 관련 기능
+  	- 카페 스크랩 등록, 해제
+    	- 내가 스크랩한 카페 리스트 조회
+    - 스프링 시큐리티를 사용한 인증,인가 기능
+  	- JWT 토큰 발급, 재발급
 - [문남경]
 - [이승헌]
     - 마이페이지 관련 기능
@@ -257,17 +270,48 @@
 <summary> 김병찬 </summary>
 	
 <details>
-<summary>~~~문제</summary>
+<summary>Mixed Content 문제</summary>
 <br>
 
 # 🤔문제 발생
-* 
+- HTTPS로 설정된 웹사이트에서 HTTP로 제공되는 리소스가 로드되어 Mixed Content 발생
+  <img src="https://raw.githubusercontent.com/cafeLogProject/README/main/image/be/chan/screenshot1.png">
+
 # 🔍원인 분석
-* 
+- https://{도메인}/api/auth/login 로 요청을 보냈을때, 응답은 정상적으로 이루어졌지만, 리소스 중 일부가 HTTP로 로드
+- 스프링 시큐리티의 기본 설정에 따라 리소스(favicon 등)가 HTTP로 호출
+- 보안상의 이유로 브라우저는 SSL(HTTPS)이 적용되지 않은 리소스 호출을 허용 X → Mixed Content 발생
+
 # ⛏해결 과정
-* 
+- Nginx 설정 확인
+    - 모든 HTTP 요청을 HTTPS 로 리다이렉트하게 했는지 확인. 없으면 추가
+    <img src="https://raw.githubusercontent.com/cafeLogProject/README/main/image/be/chan/screenshot2.png">
+
+- Nginx 설정에 프록시 헤더 추가
+    - location 블록에서 X-Forwarded-Proto 헤더를 설정하여, 클라이언트의 요청 프로토콜을 Tomcat에 전달
+    <img src="https://raw.githubusercontent.com/cafeLogProject/README/main/image/be/chan/screenshot3.png">
+    
+- application.yml 파일에 Tomcat이 X-Forwarded-Proto 헤더를 통해 요청의 프로토콜을 인식하도록 설정 추가
+```
+server:
+  tomcat:
+    remoteip:
+      protocol-header: x-forwarded-proto
+```
+- 실행 결과
+    - favicon.ico 가 HTTP → HTTPS 로 변경
+    - Mixed Content 발생 X
+    <img src="https://raw.githubusercontent.com/cafeLogProject/README/main/image/be/chan/screenshot4.png">
+
+- 스프링 시큐리티의 favicon URL을 HTTPS로 변경해도 되지만 파비콘 뿐만 아니라 다른 리소스들도 있을 수 있으므로 이 방법은 사용 X
+
 # 💎결론
-* 
+- HTTPS를 사용하는 경우 HTTP 리소스를 호출하지 않거나, Nginx를 통해 HTTPS로 리다이렉트함으로써 모든 리소스가 HTTPS를 통해 안전하게 로드되며, Mixed Content 에러가 발생하지 않게 되었음
+
+# 참고
+- https://velog.io/@giant_toothpick/mixed-content-error-처리하기-with.-Nginx
+- https://velog.io/@jamie/mixed-content-error
+
 </details>
 </details>
 
