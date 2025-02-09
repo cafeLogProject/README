@@ -211,21 +211,19 @@
 
 ## 🌟 주요 기능 구현
 - [김병찬]
-  - 로그인 관련 기능
-   	- OAuth2를 활용한 소셜로그인(구글, 페이스북, 네이버)
-  - 프로필 관련 기능
-  	- 내 정보 수정, 조회
-	- 닉네임 중복 체크
-  - 카페 관련 기능
-	- 네이버 검색 API를 활용하여 전국에 있는 카페 검색
-	- 카페 저장, 조회
-  - 스크랩 관련 기능
-	- 내가 스크랩한 카페 리스트 조회
-	- 카페 스크랩 추가, 해제
-
-  - 스프링 시큐리티를 사용한 인증, 인가 기능
-	- JWT 토큰 발급, 재발급
-- [문남경]
+	- 로그인 관련 기능
+   		- OAuth2를 활용한 소셜로그인(구글, 페이스북, 네이버)
+  	- 프로필 관련 기능
+  		- 내 정보 수정, 조회
+		- 닉네임 중복 체크
+  	- 카페 관련 기능
+	  	- 네이버 검색 API를 활용하여 전국에 있는 카페 검색
+		- 카페 저장, 조회
+  	- 스크랩 관련 기능
+		- 내가 스크랩한 카페 리스트 조회
+		- 카페 스크랩 추가, 해제
+  	- 스프링 시큐리티를 사용한 인증, 인가 기능
+		- JWT 토큰 발급, 재발급
 - [이승헌]
     - 마이페이지 관련 기능
         - 내 정보 조회, 수정
@@ -253,6 +251,7 @@
   	   	- 리뷰 최신순/별점순 조회
 		- 리뷰 태그 필터링 조회
   	   	- 카페의 모든 리뷰 조회
+  	   	- 내 모든 리뷰 조회
 		- 리뷰 CRUD
   	- 리뷰 임시저장 관련 기능
   	  	- 내 임시저장 조회
@@ -268,7 +267,6 @@
 <br>
 
 ## ⚽ 트러블 슈팅
-(노션 복붙 방법 : https://ss-en.tistory.com/5)
 <details>
 <summary> 김병찬 </summary>
 	
@@ -318,9 +316,6 @@ server:
 </details>
 </details>
 
-<details>
-<summary> 문남경 </summary>
-</details>
 <details>
 <summary> 이승헌 </summary>
 <details>
@@ -461,12 +456,12 @@ SCSS Modules의 장점을 유지하면서도 전역 스타일을 효과적으로
 
 - **조회 시**: 모든 Review엔티티의 tag 값을 조회할 때,  아래 쿼리가 **Review의 개수만큼** 반복 실행됨 → N+1 문제
     
-    ![image.png](%E1%84%8C%E1%85%A6%E1%84%86%E1%85%A9%E1%86%A8%20%E1%84%8B%E1%85%A5%E1%86%B9%E1%84%8B%E1%85%B3%E1%86%B7%20194a464e93ea802cb903ff2d951b7586/image.png)
+    <img src="https://raw.githubusercontent.com/cafeLogProject/README/main/image/be/jy/image_1-1.png">
     
 
 - **저장 시**: Review의 tag를 저장할 때, 아래 쿼리가 **tag의 개수만큼** 반복 실행됨
     
-    ![image.png](%E1%84%8C%E1%85%A6%E1%84%86%E1%85%A9%E1%86%A8%20%E1%84%8B%E1%85%A5%E1%86%B9%E1%84%8B%E1%85%B3%E1%86%B7%20194a464e93ea802cb903ff2d951b7586/image%201.png)
+    <img src="https://raw.githubusercontent.com/cafeLogProject/README/main/image/be/jy/image_1-2.png">
     
 
 # 🔍원인 분석
@@ -476,7 +471,7 @@ SCSS Modules의 장점을 유지하면서도 전역 스타일을 효과적으로
 - 위의 쿼리를 보면 review_tags라는 테이블 때문에 저장/조회할때 쿼리가 많이 실행되는것을 알 수 있음
 - review_tags 테이블은 자의로 생성한 기억이 없어서 어떤 이유로 생성되었는지 찾아보니, 아래 사진처럼 review 엔티티의 필드에 @CollectionTable로 지정되어 있었다.. 충분히 고민하지 않고 어노테이션을 적용하여 문제가 발생했던 것!
     
-    ![image.png](%E1%84%8C%E1%85%A6%E1%84%86%E1%85%A9%E1%86%A8%20%E1%84%8B%E1%85%A5%E1%86%B9%E1%84%8B%E1%85%B3%E1%86%B7%20194a464e93ea802cb903ff2d951b7586/SharedScreenshot.jpg)
+    <img src="https://raw.githubusercontent.com/cafeLogProject/README/main/image/be/jy/image_1-3.jpg">
     
 
 ### Collection의 매핑 테이블이 문제다!
@@ -485,7 +480,7 @@ SCSS Modules의 장점을 유지하면서도 전역 스타일을 효과적으로
     - **테이블이 왜 생겼을까?**
         - Collection 타입은 고유 식별자가 없기 때문에, 아래 사진처럼 부모 엔티티의 식별자를 매핑한 테이블(review_tags)이 생성됨
             
-            ![image.png](%E1%84%8C%E1%85%A6%E1%84%86%E1%85%A9%E1%86%A8%20%E1%84%8B%E1%85%A5%E1%86%B9%E1%84%8B%E1%85%B3%E1%86%B7%20194a464e93ea802cb903ff2d951b7586/image%202.png)
+            <img src="https://raw.githubusercontent.com/cafeLogProject/README/main/image/be/jy/image_1-4.png">
             
     - 이로 인해, **Collection 타입을 저장할때마다 매핑 테이블에 식별자를 저장하는 쿼리가 실행되고, 조회할때마다 매핑테이블을 조회하는 쿼리가 실행됨 →** N+1 문제
     
@@ -510,14 +505,14 @@ SCSS Modules의 장점을 유지하면서도 전역 스타일을 효과적으로
     
     아래 사진처럼 리스트에 들어갈 모든 경우의 수를 저장해야 한다.
     
-    ![image.png](%E1%84%8C%E1%85%A6%E1%84%86%E1%85%A9%E1%86%A8%20%E1%84%8B%E1%85%A5%E1%86%B9%E1%84%8B%E1%85%B3%E1%86%B7%20194a464e93ea802cb903ff2d951b7586/image%203.png)
+    <img src="https://raw.githubusercontent.com/cafeLogProject/README/main/image/be/jy/image_1-5.png">
     
 - **장점** : 다른 방법보다 구현이 쉬움
 - **단점** :
     - 리스트 값이 무엇인지 예측할 수 없으면 사용하기 어려움
     - 리스트값들을 변수로 바꾸는 것이기 때문에 리스트 값이 많을 경우 테이블 칼럼 수가 많아져 아래 사진처럼 보기 안좋음
     
-    ![image.png](%E1%84%8C%E1%85%A6%E1%84%86%E1%85%A9%E1%86%A8%20%E1%84%8B%E1%85%A5%E1%86%B9%E1%84%8B%E1%85%B3%E1%86%B7%20194a464e93ea802cb903ff2d951b7586/image%204.png)
+    <img src="https://raw.githubusercontent.com/cafeLogProject/README/main/image/be/jy/image_1-6.png">
     
 
 ### ✅ 시도**4 : @ElementCollection 타입 대신 Entity 타입 사용하기**
@@ -536,7 +531,7 @@ SCSS Modules의 장점을 유지하면서도 전역 스타일을 효과적으로
 - 적용해보았지만 작동하지 않음
     - 쿼리 로그를 통해 batch insert가 작동하지 않음을 확인
         
-        ![image.png](%E1%84%8C%E1%85%A6%E1%84%86%E1%85%A9%E1%86%A8%20%E1%84%8B%E1%85%A5%E1%86%B9%E1%84%8B%E1%85%B3%E1%86%B7%20194a464e93ea802cb903ff2d951b7586/image%205.png)
+        <img src="https://raw.githubusercontent.com/cafeLogProject/README/main/image/be/jy/image_1-7.png">
         
 
         → 서칭해보니 Hibernate는 @ElementCollection에 대해 Batch insert가 작동하지 않는다고 함
@@ -1162,7 +1157,7 @@ public List<Long> findReviewIdsByFilters(String sortMethod, Integer currentRatin
     - 모든 예외를 적어놓고, 코드 수정 시 해당 예외들을 일일이 실행하여 테스트해야 함.
         - ex) "리뷰 등록" API의 service 계층 로직을 수정하면 그에 대한 모든 예외들을 실행하여 오류를 검사해야 함.
         
-        ![image.png](%E1%84%8C%E1%85%A6%E1%84%86%E1%85%A9%E1%86%A8%20%E1%84%8B%E1%85%A5%E1%86%B9%E1%84%8B%E1%85%B3%E1%86%B7%20194a464e93ea802cb903ff2d951b7586/image%206.png)
+        <img src="https://raw.githubusercontent.com/cafeLogProject/README/main/image/be/jy/image_6-1.png">
         
         - **문제 발생** : 만약 리뷰 엔티티의 "태그" 필드를 수정하면, 그 엔티티를 사용하는 모든 API와 예외들을 하나하나 실행해야 함. 이 작업은 시간이 많이 걸리고 귀찮음
 
@@ -1324,7 +1319,7 @@ public List<Long> findReviewIdsByFilters(String sortMethod, Integer currentRatin
     (참고 : [https://www.testim.io/blog/mocking-static-methods-mockito/](https://www.testim.io/blog/mocking-static-methods-mockito/))
     
 
-![image.png](%E1%84%8C%E1%85%A6%E1%84%86%E1%85%A9%E1%86%A8%20%E1%84%8B%E1%85%A5%E1%86%B9%E1%84%8B%E1%85%B3%E1%86%B7%20194a464e93ea802cb903ff2d951b7586/image%207.png)
+<img src="https://raw.githubusercontent.com/cafeLogProject/README/main/image/be/jy/image_8-1.png">
 
 - 구현 코드
     
@@ -1356,7 +1351,7 @@ public List<Long> findReviewIdsByFilters(String sortMethod, Integer currentRatin
     
 - **문제 발생**
 
-![image.png](%E1%84%8C%E1%85%A6%E1%84%86%E1%85%A9%E1%86%A8%20%E1%84%8B%E1%85%A5%E1%86%B9%E1%84%8B%E1%85%B3%E1%86%B7%20194a464e93ea802cb903ff2d951b7586/image%208.png)
+<img src="https://raw.githubusercontent.com/cafeLogProject/README/main/image/be/jy/image_8-2.png">
 
 위 방법은 리턴 형식이 void가 아닌 경우만 가능했음
 
