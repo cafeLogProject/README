@@ -49,8 +49,9 @@
     <td align="center">Backend</td>
   </tr>
   <tr>
-    <td align="center">-</td>
-	  <img src="https://raw.githubusercontent.com/cafeLogProject/README/main/image/profile/byoungchan.png" alt="chan"/>
+    <td align="center">
+	<img src="https://raw.githubusercontent.com/cafeLogProject/README/main/image/profile/byoungchan.png" alt="chan" width="100">    
+    </td>
     <td align="center">-</td>
     <td align="center">
         <img src="https://raw.githubusercontent.com/cafeLogProject/README/main/image/profile/leeseungheon.jpg" width="100" alt="lsh"/>  
